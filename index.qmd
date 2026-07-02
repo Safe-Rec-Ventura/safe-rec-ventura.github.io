@@ -84,7 +84,11 @@ crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
     lat = coalesce(LATITUDE, POINT_Y),
     lon = coalesce(LONGITUDE, POINT_X)
   ) |>
-  filter(!is.na(lat), !is.na(lon), lat != 0, lon != 0) |>
+  filter(
+    !is.na(lat), !is.na(lon), lat != 0, lon != 0,
+    lat >= 33.9, lat <= 34.9,
+    lon >= -120.0, lon <= -118.55
+  ) |>
   mutate(
     crash_type = case_when(
       BICYCLE_ACCIDENT == "Y" & PEDESTRIAN_ACCIDENT == "Y" ~ "Both",
@@ -92,6 +96,7 @@ crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
       PEDESTRIAN_ACCIDENT == "Y" ~ "Pedestrian",
       TRUE ~ "Other"
     ),
+    is_fatal = COLLISION_SEVERITY == 1,
     color = case_when(
       crash_type == "Bike"       ~ "#2563eb",
       crash_type == "Pedestrian" ~ "#d4622a",
@@ -107,9 +112,19 @@ crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
     )
   )
 
+star_icon <- makeIcon(
+  iconUrl = paste0("data:image/svg+xml,", URLencode(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#111827" stroke="#111827" stroke-width="1.5"/></svg>',
+    reserved = TRUE
+  )),
+  iconWidth = 14, iconHeight = 14,
+  iconAnchorX = 7, iconAnchorY = 7
+)
+
 leaflet(crashes, width = "100%", height = "480px") |>
   addProviderTiles(providers$CartoDB.Positron) |>
   addCircleMarkers(
+    data = filter(crashes, !is_fatal),
     lng = ~lon, lat = ~lat,
     radius = 5,
     color = "#fff",
@@ -122,11 +137,21 @@ leaflet(crashes, width = "100%", height = "480px") |>
       showCoverageOnHover = FALSE
     )
   ) |>
+  addMarkers(
+    data = filter(crashes, is_fatal),
+    lng = ~lon, lat = ~lat,
+    icon = star_icon,
+    popup = ~label,
+    clusterOptions = markerClusterOptions(
+      maxClusterRadius = 40,
+      showCoverageOnHover = FALSE
+    )
+  ) |>
   addLegend(
     position = "bottomright",
     colors  = c("#2563eb", "#d4622a", "#7c3aed", "#6b7280"),
     labels  = c("Bike", "Pedestrian", "Both", "Other"),
-    title   = "Crash Type",
+    title   = "Crash Type<br><small style='font-weight:normal'>&#9733; star = fatal</small>",
     opacity = 0.9
   )
 ```

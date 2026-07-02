@@ -135,7 +135,7 @@ leaflet(crashes, width = "100%", height = "620px") |>
     position = "bottomright",
     colors  = c("#2563eb", "#d4622a", "#7c3aed", "#6b7280"),
     labels  = c("Bike", "Pedestrian", "Both", "Other"),
-    title   = "Crash Type<br><small style='font-weight:normal'>&#9733; star = fatal</small>",
+    title   = "Crash Type<br><small style='font-weight:normal'>&#9733; fatal</small>",
     opacity = 0.9
   ) |>
   addResetMapButton() |>
