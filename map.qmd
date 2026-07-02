@@ -8,7 +8,7 @@ subtitle: "Recorded bike and pedestrian crashes in Ventura County"
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 ```
 
-Each dot represents a recorded crash involving a cyclist or pedestrian in Ventura County. Data is sourced from official California collision records. Click any dot for date, location, and severity details.
+Each dot represents a recorded crash involving a cyclist or pedestrian in Ventura County. Data is sourced from official California collision records and covers **1/1/2020 – 3/31/2026**. Click any dot for date, location, and severity details.
 
 ```{=html}
 <div class="map-legend">

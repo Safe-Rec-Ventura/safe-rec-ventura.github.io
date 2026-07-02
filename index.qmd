@@ -18,15 +18,26 @@ format:
     <a href="get-involved.html" class="btn-hero-outline">Get Involved</a>
     <a href="take-action.html" class="btn-hero-outline">Email a Decision Maker</a>
   </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C240,64 480,16 720,40 C960,64 1200,16 1440,40 L1440,64 L0,64 Z" fill="#084c62"/>
+    </svg>
+  </div>
 </div>
 
 <!-- Stats strip -->
-<div class="stats-strip">
+<div class="stats-strip" style="padding-bottom:2.5rem">
   <div class="stat"><span class="stat-number">2,351+</span><span class="stat-label">Crash Records</span></div>
   <div class="stat"><span class="stat-number">1,230+</span><span class="stat-label">Bike Crashes</span></div>
   <div class="stat"><span class="stat-number">1,122+</span><span class="stat-label">Pedestrian Crashes</span></div>
   <div class="stat"><span class="stat-number">Ventura Co.</span><span class="stat-label">Coverage Area</span></div>
+  <div class="strip-wave">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,24 1440,20 L1440,40 L0,40 Z" fill="#f5f0e6"/>
+    </svg>
+  </div>
 </div>
+<p style="text-align:center;font-size:0.82em;color:#4a6374;margin-top:0.5rem">Data covers 1/1/2020 – 3/31/2026</p>
 ```
 
 

@@ -1,39 +1,52 @@
 /* ── Tokens ─────────────────────────────────────────────────── */
 :root {
-  --green:        #2d7d46;
-  --green-light:  #e8f5ec;
-  --blue:         #1a5f8a;
-  --blue-light:   #e3f0f8;
-  --orange:       #d4622a;
-  --cream:        #faf8f4;
-  --charcoal:     #2b2b2b;
-  --mid:          #555;
-  --border:       #ddd;
+  --ocean:        #0b6e8a;
+  --ocean-dark:   #084c62;
+  --ocean-light:  #dff1f6;
+  --teal:         #1aa3bc;
+  --sand:         #f5f0e6;
+  --seafoam:      #e2f4f8;
+  --coral:        #d4622a;
+  --charcoal:     #1e3240;
+  --mid:          #4a6374;
+  --border:       #c5dce5;
   --radius:       10px;
 }
 
 /* ── Global ─────────────────────────────────────────────────── */
-body { font-family: 'Inter', sans-serif; background: var(--cream); }
+body { font-family: 'Inter', sans-serif; background: var(--sand); }
 
 h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
 
 .navbar { background: #fff !important; border-bottom: 1px solid var(--border); }
-.navbar-brand { color: var(--green) !important; font-weight: 700; }
+.navbar-brand { color: var(--ocean) !important; font-weight: 700; }
 .nav-link     { color: var(--mid) !important; font-weight: 500; }
-.nav-link:hover { color: var(--green) !important; }
+.nav-link:hover { color: var(--ocean) !important; }
 
 /* ── Hero ────────────────────────────────────────────────────── */
 .hero {
-  background: linear-gradient(135deg, var(--green) 0%, #1a4f2e 60%, var(--blue) 100%);
+  background: linear-gradient(160deg, #0a3d52 0%, var(--ocean) 55%, var(--teal) 100%);
   color: #fff;
   text-align: center;
-  padding: 5rem 2rem 4rem;
+  padding: 5rem 2rem 5.5rem;
   margin: -1rem -1.5rem 0;
+  position: relative;
+  overflow: hidden;
 }
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 64px;
+  pointer-events: none;
+}
+.hero-wave svg { width: 100%; height: 100%; display: block; }
 
 .hero-badge {
   display: inline-block;
-  background: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.35);
   border-radius: 20px;
   padding: 0.3rem 1rem;
@@ -65,7 +78,7 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
   display: inline-block;
   padding: 0.8rem 2rem;
   background: #fff;
-  color: var(--green);
+  color: var(--ocean);
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.95rem;
@@ -91,13 +104,24 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
 
 /* ── Stats strip ─────────────────────────────────────────────── */
 .stats-strip {
-  background: var(--green);
+  background: var(--ocean-dark);
   color: #fff;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin: 0 -1.5rem;
+  position: relative;
 }
+
+.strip-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  pointer-events: none;
+}
+.strip-wave svg { width: 100%; height: 100%; display: block; }
 
 .stat {
   padding: 1.25rem 2.5rem;
@@ -116,7 +140,7 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--green);
+  color: var(--ocean);
   margin-bottom: 0.5rem;
 }
 
@@ -129,10 +153,11 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
 }
 
 .about-card {
-  background: var(--cream);
+  background: #fff;
   border-radius: var(--radius);
   padding: 1.25rem 1.4rem;
-  border-left: 4px solid var(--green);
+  border-left: 4px solid var(--ocean);
+  box-shadow: 0 2px 8px rgba(11,110,138,0.08);
 }
 .about-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; font-family: inherit; }
 .about-card p  { font-size: 0.88rem; color: var(--mid); margin: 0; }
@@ -147,12 +172,12 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
 }
 
 .email-intro {
-  background: var(--blue-light);
-  border-left: 4px solid var(--blue);
+  background: var(--seafoam);
+  border-left: 4px solid var(--ocean);
   padding: 0.9rem 1.1rem;
   border-radius: 6px;
   font-size: 0.88rem;
-  color: #14496b;
+  color: var(--ocean-dark);
   margin-bottom: 1.4rem;
 }
 .email-intro strong { display: block; font-weight: 600; margin-bottom: 0.2rem; }
@@ -191,8 +216,8 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(45,125,70,0.12);
+  border-color: var(--ocean);
+  box-shadow: 0 0 0 3px rgba(11,110,138,0.12);
 }
 
 .form-group textarea { resize: vertical; min-height: 200px; line-height: 1.65; }
@@ -203,7 +228,7 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
   display: block;
   width: 100%;
   padding: 0.85rem;
-  background: var(--blue);
+  background: var(--ocean);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -214,7 +239,7 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
   margin-top: 0.75rem;
   transition: background 0.2s, transform 0.15s;
 }
-.send-btn:hover { background: #14496b; transform: translateY(-1px); }
+.send-btn:hover { background: var(--ocean-dark); transform: translateY(-1px); }
 
 .email-note { font-size: 0.8rem; color: #aaa; text-align: center; margin-top: 0.75rem; }
 
@@ -233,9 +258,9 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
   transition: all 0.15s;
 }
 .filter-btn.active                { border-color: currentColor; background: #fff; }
-.filter-btn[data-f="all"].active  { color: var(--green); }
+.filter-btn[data-f="all"].active  { color: var(--ocean); }
 .filter-btn[data-f="bike"].active { color: #2563eb; }
-.filter-btn[data-f="ped"].active  { color: var(--orange); }
+.filter-btn[data-f="ped"].active  { color: var(--coral); }
 .filter-btn[data-f="both"].active { color: #7c3aed; }
 
 .map-legend {
@@ -269,7 +294,7 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
 
 /* ── Page hero (non-home pages) ──────────────────────────────── */
 .page-hero {
-  background: linear-gradient(135deg, var(--green) 0%, #1a4f2e 100%);
+  background: linear-gradient(160deg, #0a3d52 0%, var(--ocean) 100%);
   color: #fff;
   padding: 3rem 2rem 2.5rem;
   margin: -1rem -1.5rem 0;
