@@ -1,0 +1,304 @@
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --ocean:        #0b6e8a;
+  --ocean-dark:   #084c62;
+  --ocean-light:  #dff1f6;
+  --teal:         #1aa3bc;
+  --sand:         #f5f0e6;
+  --seafoam:      #e2f4f8;
+  --coral:        #d4622a;
+  --charcoal:     #1e3240;
+  --mid:          #4a6374;
+  --border:       #c5dce5;
+  --radius:       10px;
+}
+
+/* ── Global ─────────────────────────────────────────────────── */
+body { font-family: 'Inter', sans-serif; background: var(--sand); }
+
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+
+.navbar { background: #fff !important; border-bottom: 1px solid var(--border); }
+.navbar-brand { color: var(--ocean) !important; font-weight: 700; }
+.nav-link     { color: var(--mid) !important; font-weight: 500; }
+.nav-link:hover { color: var(--ocean) !important; }
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(160deg, #0a3d52 0%, var(--ocean) 55%, var(--teal) 100%);
+  color: #fff;
+  text-align: center;
+  padding: 5rem 2rem 5.5rem;
+  margin: -1rem -1.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 64px;
+  pointer-events: none;
+}
+.hero-wave svg { width: 100%; height: 100%; display: block; }
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  max-width: 620px;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+}
+
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn-hero-primary {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: #fff;
+  color: var(--ocean);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-hero-outline {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.7);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+
+.btn-hero-primary:hover,
+.btn-hero-outline:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+/* ── Stats strip ─────────────────────────────────────────────── */
+.stats-strip {
+  background: var(--ocean-dark);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 -1.5rem;
+  position: relative;
+}
+
+.strip-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  pointer-events: none;
+}
+.strip-wave svg { width: 100%; height: 100%; display: block; }
+
+.stat {
+  padding: 1.25rem 2.5rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+.stat:last-child { border-right: none; }
+.stat-number { font-size: 2rem; font-weight: 700; display: block; }
+.stat-label  { font-size: 0.78rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ── Section layout ──────────────────────────────────────────── */
+.section-wrap { max-width: 860px; margin: 0 auto; padding: 3.5rem 1rem; }
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 0.5rem;
+}
+
+/* ── About cards ─────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.about-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+  border-left: 4px solid var(--ocean);
+  box-shadow: 0 2px 8px rgba(11,110,138,0.08);
+}
+.about-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; font-family: inherit; }
+.about-card p  { font-size: 0.88rem; color: var(--mid); margin: 0; }
+
+/* ── Email action ────────────────────────────────────────────── */
+.email-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.email-intro {
+  background: var(--seafoam);
+  border-left: 4px solid var(--ocean);
+  padding: 0.9rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: var(--ocean-dark);
+  margin-bottom: 1.4rem;
+}
+.email-intro strong { display: block; font-weight: 600; margin-bottom: 0.2rem; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+
+.form-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.9rem; }
+
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--mid);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--ocean);
+  box-shadow: 0 0 0 3px rgba(11,110,138,0.12);
+}
+
+.form-group textarea { resize: vertical; min-height: 200px; line-height: 1.65; }
+
+.char-hint { font-size: 0.78rem; color: #aaa; text-align: right; margin-top: 0.2rem; }
+
+.send-btn {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--ocean);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.send-btn:hover { background: var(--ocean-dark); transform: translateY(-1px); }
+
+.email-note { font-size: 0.8rem; color: #aaa; text-align: center; margin-top: 0.75rem; }
+
+/* ── Map page ────────────────────────────────────────────────── */
+.map-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+
+.filter-btn {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: #e5e7eb;
+  color: var(--charcoal);
+  transition: all 0.15s;
+}
+.filter-btn.active                { border-color: currentColor; background: #fff; }
+.filter-btn[data-f="all"].active  { color: var(--ocean); }
+.filter-btn[data-f="bike"].active { color: #2563eb; }
+.filter-btn[data-f="ped"].active  { color: var(--coral); }
+.filter-btn[data-f="both"].active { color: #7c3aed; }
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid rgba(0,0,0,0.15);
+  margin-right: 0.3rem;
+  vertical-align: middle;
+}
+
+/* ── Google Form ─────────────────────────────────────────────── */
+.form-wrapper {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  margin-top: 1.5rem;
+}
+.form-wrapper iframe { width: 100%; border: none; display: block; }
+
+/* ── Page hero (non-home pages) ──────────────────────────────── */
+.page-hero {
+  background: linear-gradient(160deg, #0a3d52 0%, var(--ocean) 100%);
+  color: #fff;
+  padding: 3rem 2rem 2.5rem;
+  margin: -1rem -1.5rem 0;
+  text-align: center;
+}
+.page-hero h1 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+.page-hero p  { opacity: 0.88; max-width: 580px; margin: 0.75rem auto 0; }
