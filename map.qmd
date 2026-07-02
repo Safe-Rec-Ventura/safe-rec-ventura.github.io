@@ -16,6 +16,7 @@ Each dot represents a recorded crash involving a cyclist or pedestrian in Ventur
   <span><span class="legend-dot" style="background:#d4622a"></span>Pedestrian crash</span>
   <span><span class="legend-dot" style="background:#7c3aed"></span>Bike + Pedestrian</span>
   <span><span class="legend-dot" style="background:#6b7280"></span>Other</span>
+  <span><span style="font-size:1em; color:#111827; line-height:1">★</span> Fatal</span>
 </div>
 ```
 
@@ -39,7 +40,11 @@ crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
     lat = coalesce(LATITUDE, POINT_Y),
     lon = coalesce(LONGITUDE, POINT_X)
   ) |>
-  filter(!is.na(lat), !is.na(lon), lat != 0, lon != 0) |>
+  filter(
+    !is.na(lat), !is.na(lon), lat != 0, lon != 0,
+    lat >= 33.9, lat <= 34.9,
+    lon >= -120.0, lon <= -118.55
+  ) |>
   mutate(
     crash_type = case_when(
       BICYCLE_ACCIDENT == "Y" & PEDESTRIAN_ACCIDENT == "Y" ~ "Both",
@@ -47,12 +52,14 @@ crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
       PEDESTRIAN_ACCIDENT == "Y" ~ "Pedestrian",
       TRUE ~ "Other"
     ),
-    color = case_when(
+    is_fatal = COLLISION_SEVERITY == 1,
+    fill_color = case_when(
       crash_type == "Bike"       ~ "#2563eb",
       crash_type == "Pedestrian" ~ "#d4622a",
       crash_type == "Both"       ~ "#7c3aed",
       TRUE                       ~ "#6b7280"
     ),
+    color = fill_color,
     sev_label = severity_labels[as.character(COLLISION_SEVERITY)],
     sev_label = coalesce(sev_label, "Unknown"),
     road = paste0(
@@ -75,7 +82,7 @@ crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
 leaflet(crashes, width = "100%", height = "620px") |>
   addProviderTiles(providers$CartoDB.Positron) |>
   addCircleMarkers(
-    data = filter(crashes, crash_type == "Bike"),
+    data = filter(crashes, crash_type == "Bike", !is_fatal),
     lng = ~lon, lat = ~lat,
     radius = 5, color = "#fff", weight = 1.2,
     fillColor = "#2563eb", fillOpacity = 0.82,
@@ -83,7 +90,7 @@ leaflet(crashes, width = "100%", height = "620px") |>
     group = "Bike"
   ) |>
   addCircleMarkers(
-    data = filter(crashes, crash_type == "Pedestrian"),
+    data = filter(crashes, crash_type == "Pedestrian", !is_fatal),
     lng = ~lon, lat = ~lat,
     radius = 5, color = "#fff", weight = 1.2,
     fillColor = "#d4622a", fillOpacity = 0.82,
@@ -91,7 +98,7 @@ leaflet(crashes, width = "100%", height = "620px") |>
     group = "Pedestrian"
   ) |>
   addCircleMarkers(
-    data = filter(crashes, crash_type == "Both"),
+    data = filter(crashes, crash_type == "Both", !is_fatal),
     lng = ~lon, lat = ~lat,
     radius = 6, color = "#fff", weight = 1.5,
     fillColor = "#7c3aed", fillOpacity = 0.9,
@@ -99,22 +106,36 @@ leaflet(crashes, width = "100%", height = "620px") |>
     group = "Both"
   ) |>
   addCircleMarkers(
-    data = filter(crashes, crash_type == "Other"),
+    data = filter(crashes, crash_type == "Other", !is_fatal),
     lng = ~lon, lat = ~lat,
     radius = 4, color = "#fff", weight = 1,
     fillColor = "#6b7280", fillOpacity = 0.65,
     popup = ~label,
     group = "Other"
   ) |>
+  addMarkers(
+    data = filter(crashes, is_fatal),
+    lng = ~lon, lat = ~lat,
+    icon = makeIcon(
+      iconUrl = paste0("data:image/svg+xml,", URLencode(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#111827" stroke="#111827" stroke-width="1.5"/></svg>',
+        reserved = TRUE
+      )),
+      iconWidth = 14, iconHeight = 14,
+      iconAnchorX = 7, iconAnchorY = 7
+    ),
+    popup = ~label,
+    group = "Fatal"
+  ) |>
   addLayersControl(
-    overlayGroups = c("Bike", "Pedestrian", "Both", "Other"),
+    overlayGroups = c("Bike", "Pedestrian", "Both", "Other", "Fatal"),
     options = layersControlOptions(collapsed = FALSE)
   ) |>
   addLegend(
     position = "bottomright",
     colors  = c("#2563eb", "#d4622a", "#7c3aed", "#6b7280"),
     labels  = c("Bike", "Pedestrian", "Both", "Other"),
-    title   = "Crash Type",
+    title   = "Crash Type<br><small style='font-weight:normal'>&#9733; star = fatal</small>",
     opacity = 0.9
   ) |>
   addResetMapButton() |>
