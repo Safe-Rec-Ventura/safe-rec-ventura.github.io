@@ -30,7 +30,7 @@ format:
   <div class="stat"><span class="stat-number">2,351+</span><span class="stat-label">Crash Records</span></div>
   <div class="stat"><span class="stat-number">1,230+</span><span class="stat-label">Bike Crashes</span></div>
   <div class="stat"><span class="stat-number">1,122+</span><span class="stat-label">Pedestrian Crashes</span></div>
-  <div class="stat"><span class="stat-number">Ventura Co.</span><span class="stat-label">Coverage Area</span></div>
+  <div class="stat"><span class="stat-number">Ventura County</span><span class="stat-label">Coverage Area</span></div>
   <div class="strip-wave">
     <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,24 1440,20 L1440,40 L0,40 Z" fill="#f5f0e6"/>
