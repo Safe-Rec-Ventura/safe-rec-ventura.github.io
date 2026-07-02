@@ -1,0 +1,146 @@
+---
+title: "Crash Map"
+subtitle: "Recorded bike and pedestrian crashes in Ventura County"
+---
+
+```{=html}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+```
+
+Each dot represents a recorded crash involving a cyclist or pedestrian in Ventura County. Data is sourced from official California collision records. Click any dot for date, location, and severity details.
+
+```{=html}
+<div class="map-legend">
+  <span><span class="legend-dot" style="background:#2563eb"></span>Bike crash</span>
+  <span><span class="legend-dot" style="background:#d4622a"></span>Pedestrian crash</span>
+  <span><span class="legend-dot" style="background:#7c3aed"></span>Bike + Pedestrian</span>
+  <span><span class="legend-dot" style="background:#6b7280"></span>Other</span>
+</div>
+```
+
+```{r}
+#| label: full-crash-map
+library(leaflet)
+library(leaflet.extras)
+library(dplyr)
+library(readr)
+
+severity_labels <- c(
+  "1" = "Fatal",
+  "2" = "Severe Injury",
+  "3" = "Other Injury",
+  "4" = "Property Damage Only",
+  "0" = "Unknown"
+)
+
+crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
+  mutate(
+    lat = coalesce(LATITUDE, POINT_Y),
+    lon = coalesce(LONGITUDE, POINT_X)
+  ) |>
+  filter(!is.na(lat), !is.na(lon), lat != 0, lon != 0) |>
+  mutate(
+    crash_type = case_when(
+      BICYCLE_ACCIDENT == "Y" & PEDESTRIAN_ACCIDENT == "Y" ~ "Both",
+      BICYCLE_ACCIDENT == "Y" ~ "Bike",
+      PEDESTRIAN_ACCIDENT == "Y" ~ "Pedestrian",
+      TRUE ~ "Other"
+    ),
+    color = case_when(
+      crash_type == "Bike"       ~ "#2563eb",
+      crash_type == "Pedestrian" ~ "#d4622a",
+      crash_type == "Both"       ~ "#7c3aed",
+      TRUE                       ~ "#6b7280"
+    ),
+    sev_label = severity_labels[as.character(COLLISION_SEVERITY)],
+    sev_label = coalesce(sev_label, "Unknown"),
+    road = paste0(
+      coalesce(PRIMARY_RD, "Unknown road"),
+      if_else(!is.na(SECONDARY_RD) & SECONDARY_RD != "- ", paste0(" & ", SECONDARY_RD), "")
+    ),
+    label = paste0(
+      "<b>", road, "</b>",
+      "<br><span style='color:#555;font-size:0.85em'>",
+        coalesce(CITY, ""), " · ", coalesce(as.character(COLLISION_DATE), ""),
+      "</span>",
+      "<br style='margin-bottom:4px'>",
+      "<span style='background:", color, ";color:#fff;padding:2px 7px;border-radius:10px;font-size:0.8em;font-weight:600'>",
+        crash_type,
+      "</span>",
+      "<span style='color:#555;font-size:0.82em;margin-left:6px'>", sev_label, "</span>"
+    )
+  )
+
+leaflet(crashes, width = "100%", height = "620px") |>
+  addProviderTiles(providers$CartoDB.Positron) |>
+  addCircleMarkers(
+    data = filter(crashes, crash_type == "Bike"),
+    lng = ~lon, lat = ~lat,
+    radius = 5, color = "#fff", weight = 1.2,
+    fillColor = "#2563eb", fillOpacity = 0.82,
+    popup = ~label,
+    group = "Bike"
+  ) |>
+  addCircleMarkers(
+    data = filter(crashes, crash_type == "Pedestrian"),
+    lng = ~lon, lat = ~lat,
+    radius = 5, color = "#fff", weight = 1.2,
+    fillColor = "#d4622a", fillOpacity = 0.82,
+    popup = ~label,
+    group = "Pedestrian"
+  ) |>
+  addCircleMarkers(
+    data = filter(crashes, crash_type == "Both"),
+    lng = ~lon, lat = ~lat,
+    radius = 6, color = "#fff", weight = 1.5,
+    fillColor = "#7c3aed", fillOpacity = 0.9,
+    popup = ~label,
+    group = "Both"
+  ) |>
+  addCircleMarkers(
+    data = filter(crashes, crash_type == "Other"),
+    lng = ~lon, lat = ~lat,
+    radius = 4, color = "#fff", weight = 1,
+    fillColor = "#6b7280", fillOpacity = 0.65,
+    popup = ~label,
+    group = "Other"
+  ) |>
+  addLayersControl(
+    overlayGroups = c("Bike", "Pedestrian", "Both", "Other"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) |>
+  addLegend(
+    position = "bottomright",
+    colors  = c("#2563eb", "#d4622a", "#7c3aed", "#6b7280"),
+    labels  = c("Bike", "Pedestrian", "Both", "Other"),
+    title   = "Crash Type",
+    opacity = 0.9
+  ) |>
+  addResetMapButton() |>
+  addFullscreenControl()
+```
+
+```{r}
+#| label: crash-summary-table
+library(dplyr)
+library(readr)
+library(knitr)
+
+crashes_raw <- read_csv("data/Crashes.csv", show_col_types = FALSE)
+
+summary_tbl <- crashes_raw |>
+  mutate(
+    crash_type = case_when(
+      BICYCLE_ACCIDENT == "Y" & PEDESTRIAN_ACCIDENT == "Y" ~ "Both",
+      BICYCLE_ACCIDENT == "Y" ~ "Bike",
+      PEDESTRIAN_ACCIDENT == "Y" ~ "Pedestrian",
+      TRUE ~ "Other"
+    )
+  ) |>
+  count(crash_type, name = "Count") |>
+  arrange(desc(Count)) |>
+  rename(`Crash Type` = crash_type)
+
+kable(summary_tbl, format.args = list(big.mark = ","), caption = "Crashes by type in dataset")
+```

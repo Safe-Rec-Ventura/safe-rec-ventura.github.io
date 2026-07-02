@@ -1,0 +1,131 @@
+---
+title: ""
+format:
+  html:
+    page-layout: full
+---
+
+```{=html}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Ventura, California</div>
+  <h1>Safer Streets for <br>Pedestrians &amp; Cyclists</h1>
+  <p>Safe Rec Ventura is a community effort to build better bike and pedestrian infrastructure in Ventura. Explore crash data, share your story, and help us push for change.</p>
+  <div class="hero-ctas">
+    <a href="get-involved.html" class="btn-hero-outline">Get Involved</a>
+    <a href="take-action.html" class="btn-hero-outline">Email a Decision Maker</a>
+  </div>
+</div>
+
+<!-- Stats strip -->
+<div class="stats-strip">
+  <div class="stat"><span class="stat-number">2,351+</span><span class="stat-label">Crash Records</span></div>
+  <div class="stat"><span class="stat-number">1,230+</span><span class="stat-label">Bike Crashes</span></div>
+  <div class="stat"><span class="stat-number">1,122+</span><span class="stat-label">Pedestrian Crashes</span></div>
+  <div class="stat"><span class="stat-number">Ventura Co.</span><span class="stat-label">Coverage Area</span></div>
+</div>
+```
+
+
+
+# Our Mission 
+
+### Why Safe Rec Ventura?
+
+Ventura has thousands of recorded bike and pedestrian crashes, many of which are preventable. We believe every resident deserves to walk, roll, and ride safely. Our goal is to inform the community, collect community voices, and advocate for evidence-based infrastructure improvements.
+
+```{=html}
+<div class="about-grid">
+  <div class="about-card">
+    <h3>🗺 Data-Driven Advocacy</h3>
+    <p>We map real crash records from CHP to show exactly where and how crashes happen. By finding the high crash areas, we can turn our data into a call for action.</p>
+  </div>
+  <div class="about-card">
+    <h3>📣 Community Voice</h3>
+    <p>Your experience matters. We collect stories and observations from residents to complement official crash data and highlight gaps.</p>
+  </div>
+  <div class="about-card">
+    <h3>🏛 Policy Change</h3>
+    <p>Our website makes it simple for residents to connect directly with local decision makers by providing an email template to send to local representatives. </p>
+  </div>
+  <div class="about-card">
+    <h3>🚶 Who We Serve</h3>
+    <p>Cyclists, pedestrians, parents walking kids to school, seniors, and anyone who believes the streets should be safe for everyone — not just drivers.</p>
+  </div>
+</div>
+```
+
+---
+
+## Explore the Data
+
+```{r}
+#| label: home-map-preview
+library(leaflet)
+library(dplyr)
+library(readr)
+
+crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
+  mutate(
+    lat = coalesce(LATITUDE, POINT_Y),
+    lon = coalesce(LONGITUDE, POINT_X)
+  ) |>
+  filter(!is.na(lat), !is.na(lon), lat != 0, lon != 0) |>
+  mutate(
+    crash_type = case_when(
+      BICYCLE_ACCIDENT == "Y" & PEDESTRIAN_ACCIDENT == "Y" ~ "Both",
+      BICYCLE_ACCIDENT == "Y" ~ "Bike",
+      PEDESTRIAN_ACCIDENT == "Y" ~ "Pedestrian",
+      TRUE ~ "Other"
+    ),
+    color = case_when(
+      crash_type == "Bike"       ~ "#2563eb",
+      crash_type == "Pedestrian" ~ "#d4622a",
+      crash_type == "Both"       ~ "#7c3aed",
+      TRUE                       ~ "#6b7280"
+    ),
+    label = paste0(
+      "<b>", coalesce(PRIMARY_RD, "Unknown road"), "</b>",
+      if_else(!is.na(SECONDARY_RD), paste0(" & ", SECONDARY_RD), ""),
+      "<br><span style='color:#555'>", coalesce(CITY, ""), " · ", coalesce(as.character(COLLISION_DATE), ""), "</span>",
+      "<br><span style='background:", color, ";color:#fff;padding:2px 6px;border-radius:8px;font-size:0.8em'>",
+      crash_type, "</span>"
+    )
+  )
+
+leaflet(crashes, width = "100%", height = "480px") |>
+  addProviderTiles(providers$CartoDB.Positron) |>
+  addCircleMarkers(
+    lng = ~lon, lat = ~lat,
+    radius = 5,
+    color = "#fff",
+    weight = 1.2,
+    fillColor = ~color,
+    fillOpacity = 0.8,
+    popup = ~label,
+    clusterOptions = markerClusterOptions(
+      maxClusterRadius = 40,
+      showCoverageOnHover = FALSE
+    )
+  ) |>
+  addLegend(
+    position = "bottomright",
+    colors  = c("#2563eb", "#d4622a", "#7c3aed", "#6b7280"),
+    labels  = c("Bike", "Pedestrian", "Both", "Other"),
+    title   = "Crash Type",
+    opacity = 0.9
+  )
+```
+
+[View the full interactive crash map →](map.html)
+
+---
+
+## Get Involved
+
+Ready to help make Ventura safer? [Fill out our community interest form](get-involved.html) to let us know how you'd like to contribute — from advocacy to outreach to data collection.
+
+[Want to speak up directly? Email a city decision maker →](take-action.html)

@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Safe Rec Ventura"
+  favicon: "favicon.ico"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: map.qmd
+        text: Crash Map
+      - href: get-involved.qmd
+        text: Get Involved
+      - href: take-action.qmd
+        text: "✉ Email Decision Maker"
+
+  page-footer:
+    left: "Safe Rec Ventura — Safer streets for everyone in Ventura County"
+    right: "Questions? [Contact us](mailto:adams.annie11@gmail.com)"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    page-layout: full
+
+execute:
+  echo: false
+  warning: false
+  message: false

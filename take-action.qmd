@@ -1,0 +1,91 @@
+---
+title: "Take Action"
+subtitle: "Send a message to a local decision maker advocating for safer streets in Ventura"
+---
+
+```{=html}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+```
+
+Personalized messages from real residents carry weight. Use the form below to compose your message.You can use the template provided, or write your own letter. Add your neighborhood, a personal story, or a specific concern about a street near you. When you click **Send Email**, your default email app will open with the message ready to send.
+
+```{=html}
+<div class="email-box">
+
+  <div class="email-intro">
+    <strong>Who receives this email?</strong>
+    This message goes to a local city decision maker working on transportation and street safety in Ventura.
+    Your voice helps prioritize safer infrastructure for cyclists and pedestrians.
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="sender-name">Your Name</label>
+      <input type="text" id="sender-name" placeholder="Jane Smith" />
+    </div>
+    <div class="form-group">
+      <label for="sender-hood">Your Neighborhood <em style="font-weight:400;text-transform:none">(optional)</em></label>
+      <input type="text" id="sender-hood" placeholder="e.g. Midtown, Downtown, Montalvo" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email-subject">Subject Line</label>
+    <input type="text" id="email-subject" value="Ventura Resident: Safer Bike &amp; Pedestrian Streets" />
+  </div>
+
+  <div class="form-group">
+    <label for="email-body">Your Message</label>
+    <textarea id="email-body" oninput="updateCount()">Honorable Representative,
+    
+We are writing to you with deep urgency and grief on behalf of our community — residents, cyclists, recreational users, and workers who live and travel throughout Ventura County and the greater tri-county area.
+
+
+
+
+Sincerely,
+[Your Name]</textarea>
+    <div class="char-hint" id="char-count">0 characters</div>
+  </div>
+
+  <button class="send-btn" onclick="sendEmail()">✉ Send Email to Decision Maker</button>
+  <p class="email-note">
+    Clicking "Send Email" opens your default email application with this message pre-filled —
+    you can review it before sending. Nothing is sent automatically.
+  </p>
+</div>
+
+<script>
+function updateCount() {
+  const len = document.getElementById("email-body").value.length;
+  document.getElementById("char-count").textContent = len.toLocaleString() + " characters";
+}
+
+function sendEmail() {
+  const name    = document.getElementById("sender-name").value.trim();
+  const hood    = document.getElementById("sender-hood").value.trim();
+  const subject = document.getElementById("email-subject").value.trim();
+  let   body    = document.getElementById("email-body").value.trim();
+
+  // Insert name into signature placeholder
+  const sig = name ? (hood ? name + ", " + hood + " resident" : name) : "[Your Name]";
+  body = body.replace("[Your Name]", sig);
+
+  const mailto = "mailto:adams.annie11@gmail.com"
+    + "?subject=" + encodeURIComponent(subject)
+    + "&body="    + encodeURIComponent(body);
+
+  window.location.href = mailto;
+}
+
+// Init count
+document.addEventListener("DOMContentLoaded", updateCount);
+</script>
+```
+
+---
+
+### Tips for writing an effective message
+
+
