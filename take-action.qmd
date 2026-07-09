@@ -72,7 +72,7 @@ function sendEmail() {
   const sig = name ? (hood ? name + ", " + hood + " resident" : name) : "[Your Name]";
   body = body.replace("[Your Name]", sig);
 
-  const mailto = "mailto:adams.annie11@gmail.com"
+  const mailto = "mailto:saferecventura@gmail.com"
     + "?subject=" + encodeURIComponent(subject)
     + "&body="    + encodeURIComponent(body);
 

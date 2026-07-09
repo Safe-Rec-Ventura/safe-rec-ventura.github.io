@@ -23,6 +23,6 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
 
 <p style="font-size:0.82rem;color:#aaa;text-align:center;margin-top:0.75rem">
   Having trouble with the form?
-  <a href="mailto:adams.annie11@gmail.com">Email us directly</a>.
+  <a href="mailto:saferecventura@gmail.com">Email us directly</a>.
 </p>
 ```
