@@ -11,7 +11,7 @@ website:
         text: Home
       - href: map.qmd
         text: Crash Map
-      - href: get-involved.qmd
+      - href: protect-pch.qmd
         text: Protect PCH
       - href: stay-connected.qmd
         text: Stay Connected

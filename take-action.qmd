@@ -1,6 +1,6 @@
 ---
 title: "Email a Decision Maker"
-subtitle: "Send a message to a local decision maker advocating for safer streets in Ventura"
+subtitle: "Send a message to the decision-makers who have the power to make Pacific Coast Highway safer."
 ---
 
 ```{=html}
@@ -8,7 +8,6 @@ subtitle: "Send a message to a local decision maker advocating for safer streets
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 ```
 
-Send a message to the decision-makers who have the power to make Pacific Coast Highway safer.
 
 Personal messages from community members matter. Use the form below to representatives and call for immediate action to protect cyclists, pedestrians, and everyone who travels this corridor. You can use the provided template or add your own story, connection to PCH, and why safer infrastructure matters to you.
 
@@ -91,6 +90,5 @@ document.addEventListener("DOMContentLoaded", updateCount);
 
 ---
 
-### Tips for writing an effective message
 
 
