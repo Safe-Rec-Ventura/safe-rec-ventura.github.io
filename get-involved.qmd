@@ -8,28 +8,9 @@ subtitle: "Join the community effort to build safer streets in Ventura"
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 ```
 
-We're building a network of Ventura residents, advocates, cyclists, and pedestrians who want to make our streets safer. Sign up below to stay connected — and keep reading for concrete actions you can take right now.
+Here are four concrete things you can do right now to make PCH safer.
 
 ```{=html}
-<div class="form-wrapper">
-  <iframe
-    src="https://docs.google.com/forms/d/e/1FAIpQLSdcVlMLhPYG7dwS0gpLwXdd4uDSmWPe_gH7TFlsTliZai0i9Q/viewform?embedded=true"
-    height="960"
-    title="Safe Rec Ventura Community Interest Form"
-    loading="lazy">
-    Loading form…
-  </iframe>
-</div>
-
-<p style="font-size:0.82rem;color:#aaa;text-align:center;margin-top:0.75rem">
-  Having trouble with the form?
-  <a href="mailto:adams.annie11@gmail.com">Email us directly</a>.
-</p>
-
-<hr style="margin: 3rem 0 2rem;" />
-
-<h2 style="margin-bottom:1.75rem;">Take Action Now</h2>
-
 <div class="action-steps">
 
   <!-- STEP 1 -->
@@ -166,8 +147,8 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
   display: flex;
   gap: 1.25rem;
   align-items: flex-start;
-  background: #f8f8f8;
-  border-left: 4px solid #2c7a4b;
+  background: var(--seafoam);
+  border-left: 4px solid var(--ocean);
   border-radius: 0 8px 8px 0;
   padding: 1.25rem 1.5rem;
 }
@@ -176,7 +157,7 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
   flex-shrink: 0;
   width: 2.25rem;
   height: 2.25rem;
-  background: #2c7a4b;
+  background: var(--ocean);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -191,6 +172,7 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
   margin: 0 0 0.5rem;
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--charcoal);
 }
 
 .step-content h4 {
@@ -199,13 +181,13 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #555;
+  color: var(--ocean);
 }
 
 .step-content p {
   margin: 0 0 0.65rem;
   font-size: 0.95rem;
-  color: #444;
+  color: var(--mid);
 }
 
 .step-content ul,
@@ -213,7 +195,7 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
   margin: 0 0 0.75rem;
   padding-left: 1.4rem;
   font-size: 0.95rem;
-  color: #444;
+  color: var(--mid);
 }
 
 .step-content li {
@@ -224,7 +206,7 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
 .step-date {
   font-size: 0.85rem !important;
   font-weight: 700;
-  color: #2c7a4b !important;
+  color: var(--teal) !important;
   margin-bottom: 0.6rem !important;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -237,7 +219,7 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
 
 .recipient-list li {
   padding: 0.65rem 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border);
   font-size: 0.9rem !important;
   line-height: 1.6 !important;
 }
@@ -248,23 +230,7 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
 
 .address {
   font-size: 0.82rem;
-  color: #888;
-}
-
-.email-copy-block {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0 1rem;
-  overflow-x: auto;
-}
-
-.email-copy-block code {
-  font-size: 0.78rem;
-  color: #333;
-  word-break: break-all;
-  white-space: normal;
+  color: var(--mid);
 }
 
 .detail-list {
@@ -274,7 +240,7 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
 
 .detail-list li {
   padding: 0.35rem 0;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid var(--border);
   font-size: 0.95rem !important;
 }
 
@@ -283,12 +249,12 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
 }
 
 .step-tip {
-  background: #eaf4ee;
-  border-left: 3px solid #2c7a4b;
+  background: var(--ocean-light);
+  border-left: 3px solid var(--ocean);
   padding: 0.65rem 0.9rem;
   border-radius: 0 4px 4px 0;
   font-size: 0.88rem !important;
-  color: #333 !important;
+  color: var(--ocean-dark) !important;
   margin-top: 1rem !important;
 }
 
@@ -296,59 +262,13 @@ We're building a network of Ventura residents, advocates, cyclists, and pedestri
   display: inline-block;
   margin-top: 0.25rem;
   font-weight: 600;
-  color: #2c7a4b;
+  color: var(--ocean);
   text-decoration: none;
 }
 
 .action-link:hover {
+  color: var(--ocean-dark);
   text-decoration: underline;
-}
-
-.email-launcher {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0 1rem;
-}
-
-.email-launcher label {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #555;
-  margin-bottom: 0.4rem;
-}
-
-.email-launcher-row {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.email-launcher-row input[type="email"] {
-  flex: 1;
-  min-width: 200px;
-  padding: 0.45rem 0.7rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-
-.email-launcher-row button {
-  padding: 0.45rem 1rem;
-  background: #2c7a4b;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.email-launcher-row button:hover {
-  background: #235f3a;
 }
 </style>
 ```

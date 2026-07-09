@@ -1,0 +1,28 @@
+---
+title: "Stay Connected"
+subtitle: "Join the community effort to build safer streets in Ventura"
+---
+
+```{=html}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+```
+
+We're building a network of Ventura residents, advocates, cyclists, and pedestrians who want to make our streets safer. Whether you want to attend meetings, contribute data, or just stay informed, fill out the form below and we'll be in touch.
+
+```{=html}
+<div class="form-wrapper">
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLSdcVlMLhPYG7dwS0gpLwXdd4uDSmWPe_gH7TFlsTliZai0i9Q/viewform?embedded=true"
+    height="960"
+    title="Safe Rec Ventura Community Interest Form"
+    loading="lazy">
+    Loading form…
+  </iframe>
+</div>
+
+<p style="font-size:0.82rem;color:#aaa;text-align:center;margin-top:0.75rem">
+  Having trouble with the form?
+  <a href="mailto:adams.annie11@gmail.com">Email us directly</a>.
+</p>
+```

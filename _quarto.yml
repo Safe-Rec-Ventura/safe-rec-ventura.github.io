@@ -13,6 +13,8 @@ website:
         text: Crash Map
       - href: get-involved.qmd
         text: Get Involved
+      - href: stay-connected.qmd
+        text: Stay Connected
       - href: take-action.qmd
         text: "✉ Email Decision Maker"
 
