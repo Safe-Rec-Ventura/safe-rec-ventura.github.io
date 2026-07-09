@@ -42,11 +42,24 @@ format:
 
 
 
+# Our Current Focus: Protect PCH
+
+We launched [Protect PCH]() in honor of our friends Kellie Standish, Colby Tucker, and everyone whose lives have been forever changed by preventable tragedies on Ventura County's Pacific Coast Highway.
+
+PCH should be safe for everyone. We are calling on Ventura County and Caltrans to take immediate action by accelerating safety improvements, conducting an expedited safety study, and building protected northbound infrastructure that saves lives, specifically along the corridor near Solimar Beach, Faria Beach, Rincon, and Emma Wood State Beach. 
+
+Every day without action puts more people at risk. It's time to Protect PCH.
+
+
+
+
 # Our Mission 
 
 ### Why Safe Rec Ventura?
 
-Ventura has thousands of recorded bike and pedestrian crashes, many of which are preventable. We believe every resident deserves to walk, roll, and ride safely. Our goal is to inform the community, collect community voices, and advocate for evidence-based infrastructure improvements.
+Ventura has thousands of recorded bike and pedestrian crashes, many of which are preventable. We believe every resident deserves to walk, roll, and ride safely.
+
+Through community advocacy, data-driven education, and campaigns like Protect PCH, we amplify community voices and work to advance evidence-based infrastructure improvements that make our roads safer for everyone.
 
 ```{=html}
 <div class="about-grid">

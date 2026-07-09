@@ -1,14 +1,20 @@
 ---
-title: "Get Involved"
-subtitle: "Join the community effort to build safer streets in Ventura"
+title: "Protect PCH"
+subtitle: "Join the community effort to make PCH safer for everyone"
 ---
+In honor of Kellie Standish, Colby Tucker, and everyone impacted by preventable tragedies on Ventura County's Pacific Coast Highway, we're calling on Ventura County and Caltrans to take immediate action to make PCH safer.
+
+Real change happens when our community speaks with one voice. The more our community takes action, the harder we are to ignore. 
+
+
+
 
 ```{=html}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 ```
 
-Here are four concrete things you can do right now to make PCH safer.
+Here are four impactful ways you can join us and make your voice heard.
 
 ```{=html}
 <div class="action-steps">
@@ -18,7 +24,7 @@ Here are four concrete things you can do right now to make PCH safer.
     <div class="step-number">1</div>
     <div class="step-content">
       <h3>Send the Letter to Your Representatives</h3>
-      <p>A letter has already been drafted for you. It is addressed to five decision-makers who have the power to direct Caltrans, fund safety improvements, and demand action on PCH.</p>
+      <p>A letter has already been drafted for you. It is addressed to five decision-makers who have the power to connect and collaborate with Caltrans, fund safety improvements, and demand action on PCH.</p>
 
       <h4>Who the letter goes to:</h4>
       <ul class="recipient-list">
@@ -68,11 +74,12 @@ Here are four concrete things you can do right now to make PCH safer.
   <div class="action-step">
     <div class="step-number">2</div>
     <div class="step-content">
-      <h3>Show Up at the Ventura County Board of Supervisors</h3>
+      <h3>Show Up at the Ventura County Board of Supervisors Meetings</h3>
       <p class="step-date">September 1, 2026 &nbsp;·&nbsp; 8:30 am</p>
-      <p>This is the most powerful thing you can do in person. The Board of Supervisors oversees county road policy, funds infrastructure, and has direct relationships with Caltrans. Showing up with a crowd sends an unmistakable message.</p>
+      <p>This is the most powerful thing you can do in person. The Ventura County Board of Supervisors oversees county road policy, funds infrastructure, and has direct relationships with Caltrans. Showing up with a crowd sends an unmistakable message.</p>
+      <p>View the full schedule of upcoming Ventura County Board of Supervisor meetings here.<p>
 
-      <h4>The Details:</h4>
+      <h4>Septmeber 1, 2026:</h4>
       <ul class="detail-list">
         <li><strong>Date:</strong> Tuesday, September 1, 2026</li>
         <li><strong>Time:</strong> 8:30 am &mdash; arrive by 8:00 am to fill out a speaker card</li>
@@ -110,7 +117,6 @@ Here are four concrete things you can do right now to make PCH safer.
     <div class="step-number">3</div>
     <div class="step-content">
       <h3>Spread the Word</h3>
-      <p>The more people who send letters and show up on September 1, the stronger the political signal. Please share this action guide widely.</p>
       <ul>
         <li>Forward this page to cyclists, paddlers, hikers, parents, neighbors — anyone who recreates in Ventura.</li>
         <li>Share on local Facebook groups, Nextdoor, cycling club listservs, and neighborhood apps.</li>

@@ -8,7 +8,7 @@ subtitle: "Join the community effort to build safer streets in Ventura"
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
 ```
 
-We're building a network of Ventura residents, advocates, cyclists, and pedestrians who want to make our streets safer. Whether you want to attend meetings, contribute data, or just stay informed, fill out the form below and we'll be in touch.
+We're building a network of Ventura residents, advocates, cyclists, and pedestrians who want to make our streets safer. Whether you want to attend meetings or just stay informed, fill out the form below and we'll be in touch.
 
 ```{=html}
 <div class="form-wrapper">
