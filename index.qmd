@@ -27,9 +27,9 @@ format:
 
 <!-- Stats strip -->
 <div class="stats-strip" style="padding-bottom:2.5rem">
-  <div class="stat"><span class="stat-number">2,351+</span><span class="stat-label">Crash Records</span></div>
-  <div class="stat"><span class="stat-number">1,230+</span><span class="stat-label">Bike Crashes</span></div>
-  <div class="stat"><span class="stat-number">1,122+</span><span class="stat-label">Pedestrian Crashes</span></div>
+  <div class="stat"><span class="stat-number">4,661+</span><span class="stat-label">Crash Records</span></div>
+  <div class="stat"><span class="stat-number">2,399+</span><span class="stat-label">Bike Crashes</span></div>
+  <div class="stat"><span class="stat-number">2,295+</span><span class="stat-label">Pedestrian Crashes</span></div>
   <div class="stat"><span class="stat-number">Ventura County</span><span class="stat-label">Coverage Area</span></div>
   <div class="strip-wave">
     <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@ format:
     </svg>
   </div>
 </div>
-<p style="text-align:center;font-size:0.82em;color:#4a6374;margin-top:0.5rem">Data covers 1/1/2020 – 3/31/2026</p>
+<p style="text-align:center;font-size:0.82em;color:#4a6374;margin-top:0.5rem">Data covers 1/1/2014 – 3/31/2026</p>
 ```
 
 
@@ -94,8 +94,8 @@ library(readr)
 
 crashes <- read_csv("data/Crashes.csv", show_col_types = FALSE) |>
   mutate(
-    lat = coalesce(LATITUDE, POINT_Y),
-    lon = coalesce(LONGITUDE, POINT_X)
+    lat = coalesce(POINT_Y, LATITUDE),
+    lon = coalesce(POINT_X, LONGITUDE)
   ) |>
   filter(
     !is.na(lat), !is.na(lon), lat != 0, lon != 0,

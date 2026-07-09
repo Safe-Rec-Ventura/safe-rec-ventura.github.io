@@ -18,14 +18,14 @@
     "href": "map.html",
     "title": "Crash Map",
     "section": "",
-    "text": "Each dot represents a recorded crash involving a cyclist or pedestrian in Ventura County. Data is sourced from SWITRS using CHP reports and covers 1/1/2020 – 3/31/2026. Click any dot for date, location, and severity details.\n\n  Bike crash\n  Pedestrian crash\n  Bike + Pedestrian\n  Other\n  ★ Fatal\n\n\n\n\n\n\n\n\n\n\nCrashes by type in dataset\n\n\nCrash Type\nCount\n\n\n\n\nBike\n1,228\n\n\nPedestrian\n1,107\n\n\nBoth\n25\n\n\nOther\n23"
+    "text": "Each dot represents a recorded crash involving a cyclist or pedestrian in Ventura County. Data is sourced from SWITRS using CHP reports and covers 1/1/2014 – 3/31/2026. Click any dot for date, location, and severity details.\n\n  Bike crash\n  Pedestrian crash\n  Bike + Pedestrian\n  Other\n  ★ Fatal\n\n\n\n\n\n\n\n\n\n\nCrashes by type in dataset\n\n\nCrash Type\nCount\n\n\n\n\nBike\n2,366\n\n\nPedestrian\n2,262\n\n\nOther\n34\n\n\nBoth\n33"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Safer Streets for Pedestrians & Cyclists",
     "section": "",
-    "text": "Data covers 1/1/2020 – 3/31/2026"
+    "text": "Data covers 1/1/2014 – 3/31/2026"
   },
   {
     "objectID": "index.html#explore-the-data",

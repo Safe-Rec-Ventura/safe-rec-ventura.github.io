@@ -411,6 +411,33 @@ ul.task-list li input[type="checkbox"] {
   color: var(--ocean-dark);
   text-decoration: underline;
 }
+
+@media (max-width: 600px) {
+  .action-step {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem 1rem;
+  }
+
+  .step-number {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .step-content h3 {
+    font-size: 1rem;
+  }
+
+  .recipient-list li,
+  .detail-list li {
+    word-break: break-word;
+  }
+
+  .recipient-list a {
+    word-break: break-all;
+  }
+}
 </style>
 
 
