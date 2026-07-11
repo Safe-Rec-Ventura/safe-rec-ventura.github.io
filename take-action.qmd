@@ -19,8 +19,9 @@ When you click Send Email, your default email app will open with the message rea
 
   <div class="email-intro">
     <strong>Who receives this email?</strong>
-    This message goes to a local decision makers working on transportation and street safety in Ventura.
+    This message goes to a local decision makers working on transportation and street safety in Ventura. Your message will also be CC'd to Safe Rec Ventura. We use these copies only to tally how many emails have been sent, so we can hold the Board of Supervisors accountable.
     Your voice helps prioritize safer infrastructure for cyclists and pedestrians.
+    
   </div>
 
   <div class="form-row">
@@ -50,7 +51,6 @@ On the evening of June 11, 2026, two people were killed and a third seriously in
 
 We write to you today about a separate and independent matter, one that predates June 11 and will outlast it: the documented, chronic failure of the PCH corridor in Ventura County to protect the lives of cyclists and pedestrians.
 
-
 This is not a problem that began with one driver's choice. According to crash data documented in the California SWITRS database, maintained by the California Highway Patrol and mapped by UC Berkeley's SafeTREC through the TIMS platform, this stretch of State Route 1 has recorded 32 crashes over recent years 20 of which occurred in the northbound direction  resulting in fatalities and countless serious injuries including broken bones, traumatic brain injuries, and hospitalizations. These crashes span a range of contributing factors, not only impairment. For every person who has died on this corridor, many more have been left with injuries they will carry for the rest of their lives. The infrastructure of this corridor does not require a drunk driver to kill or injure people. It has done so without one. That is the independent public safety crisis we are asking you to address.
 
 This stretch of highway operates at a posted speed limit of 45 mph, with vehicles routinely exceeding that speed. It carries painted bike lanes with no physical separation from high-speed vehicle traffic. It provides beach access points, campgrounds, and recreational entry used by millions of visitors annually across the tri-county region. The infrastructure signals to cyclists, pedestrians, and families that this is a corridor where they are welcome. That signal is not backed by a design that protects their lives.
@@ -76,6 +76,7 @@ We acknowledge that improvements to a state highway require coordination across 
 We are unequivocal: the driver who chose to drive while impaired and who had previously been warned of the deadly consequences of doing so following a December 2025 DUI arrest bears sole criminal responsibility for the deaths of Kellie and Colby. Nothing in this letter should be read as diminishing that responsibility or as commentary on the pending criminal proceedings. Justice for Kellie and Colby must be pursued fully and without compromise.
 
 We are community members who ride, run, walk, live, and work along the Central Coast. We are not asking for the road to be closed to cars. We are asking you to treat this corridor as the public safety emergency the data shows it to be and to act accordingly.
+
 Thank you for your attention to this critical matter. We welcome the opportunity to meet with your office and with Caltrans to discuss solutions. We stand ready to engage.
 
 Sincerely,
@@ -118,8 +119,23 @@ function sendEmail() {
   const sig = hood ? name + ", " + hood + " resident" : name;
   body = body.replace("[Your Name]", sig);
 
-  const mailto = "mailto:saferecventura@gmail.com"
-    + "?subject=" + encodeURIComponent(subject)
+  const to = [
+    "matt.lavere@venturacounty.gov",
+    "brian.brennan@venturacounty.gov",
+    "assemblymember.bennet@assembly.ca.gov",
+    "atticus.reyes@asm.ca.gov",
+    "patricia.quiroz@asm.ca.gov",
+    "erica.reyes@mail.house.gov",
+    "amisha.deyoung@mail.house.gov",
+    "lupe.lopezgarcia@sen.ca.gov",
+    "benjamin.peterson@sen.ca.gov",
+    "marlon.regisford@dot.ca.gov",
+    "ryan.w.johnson@dot.ca.gov"
+  ].join(",");
+
+  const mailto = "mailto:" + to
+    + "?bcc=saferecventura@gmail.com"
+    + "&subject=" + encodeURIComponent(subject)
     + "&body="    + encodeURIComponent(body);
 
   window.location.href = mailto;
