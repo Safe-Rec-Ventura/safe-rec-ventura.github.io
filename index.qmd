@@ -13,7 +13,7 @@ format:
 <div class="hero">
   <div class="hero-badge">Ventura, California</div>
   <h1>Safer Streets for <br>Pedestrians &amp; Cyclists</h1>
-  <p>Safe Rec Ventura is a community effort to build better bike and pedestrian infrastructure in Ventura. Explore crash data, share your story, and help us push for change.</p>
+  <p>Safe Rec Ventura is a community effort to build better bike and pedestrian infrastructure in Ventura. Explore crash data, share your story, and help us create change.</p>
   <div class="hero-ctas">
     <a href="get-involved.html" class="btn-hero-outline">Get Involved</a>
     <a href="take-action.html" class="btn-hero-outline">Email a Decision Maker</a>
@@ -175,6 +175,8 @@ leaflet(crashes, width = "100%", height = "480px") |>
 
 ## Get Involved
 
-Ready to help make Ventura safer? [Fill out our community interest form](get-involved.html) to let us know how you'd like to contribute — from advocacy to outreach to data collection.
+Ready to help make Ventura safer? [Fill out our community interest form](stay-connected.html) to stay updated on meetings and progress on making Ventura safer for pedestrians and cyclists.  
 
-[Want to speak up directly? Email a city decision maker →](take-action.html)
+[Want to speak up directly? Email a decision maker →](take-action.html)
+
+Learn more about our current campaign, [Protect PCH.](protect-pch.html)
