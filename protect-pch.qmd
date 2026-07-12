@@ -39,7 +39,7 @@ Here are four impactful ways you can join us and make your voice heard.
         <li>
           <strong>Steve Bennett</strong> — CA State Assemblymember, District 38<br>
           <span class="address">300 E. Esplanade Dr., Ste. 1790, Oxnard</span><br>
-          <a href="mailto:assemblymember.bennet@assembly.ca.gov">assemblymember.bennet@assembly.ca.gov</a> &nbsp;·&nbsp; <a href="mailto:atticus.reyes@asm.ca.gov">atticus.reyes@asm.ca.gov</a> &nbsp;·&nbsp; <a href="mailto:patricia.quiroz@asm.ca.gov">patricia.quiroz@asm.ca.gov</a>
+ <a href="mailto:atticus.reyes@asm.ca.gov">atticus.reyes@asm.ca.gov</a> &nbsp;·&nbsp; <a href="mailto:patricia.quiroz@asm.ca.gov">patricia.quiroz@asm.ca.gov</a>
         </li>
         <li>
           <strong>Salud Carbajal</strong> — U.S. Representative, CA-24<br>
