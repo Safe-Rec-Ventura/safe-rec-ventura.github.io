@@ -122,7 +122,6 @@ function sendEmail() {
   const to = [
     "matt.lavere@venturacounty.gov",
     "brian.brennan@venturacounty.gov",
-    "assemblymember.bennet@assembly.ca.gov",
     "atticus.reyes@asm.ca.gov",
     "patricia.quiroz@asm.ca.gov",
     "erica.reyes@mail.house.gov",
