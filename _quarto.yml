@@ -5,6 +5,13 @@ project:
 website:
   title: "Safe Rec Ventura"
   favicon: "favicon.ico"
+  open-graph:
+    image: logo.png
+    description: "Safer streets for everyone in Ventura County"
+  twitter-card:
+    image: logo.png
+    description: "Safer streets for everyone in Ventura County"
+    card-style: summary_large_image
   navbar:
     left:
       - href: index.qmd
