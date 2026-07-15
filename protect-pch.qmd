@@ -27,7 +27,7 @@ Here are four impactful ways you can join us and make your voice heard.
       <p>A letter has already been drafted for you. It is addressed to five decision-makers who have the power to connect and collaborate with Caltrans, fund safety improvements, and demand action on PCH.</p>
 
       <h4>How to send it:</h4>
-      <p>Click <a href="take-action.html"><strong>Email a Decision Maker</strong></a> to send the letter directly. Email is the fastest and most trackable method Each representative has a contact form on their official website.</p>
+      <p>Click <a href="take-action.html"><strong>Email a Decision Maker</strong></a> to send the letter directly. Email is the fastest and most trackable method. Each representative has a contact form on their official website.</p>
 
       <h4>Who the letter goes to:</h4>
       <ul class="recipient-list">

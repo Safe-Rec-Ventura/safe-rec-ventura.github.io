@@ -158,25 +158,64 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
-<p>Personal messages from community members matter. Use the form below to representatives and call for immediate action to protect cyclists, pedestrians, and everyone who travels this corridor. You can use the provided template or add your own story, connection to PCH, and why safer infrastructure matters to you.</p>
+<p>Personal messages from community members matter. Use the form below to email representatives and call for immediate action to protect cyclists, pedestrians, and everyone who travels this corridor. You can use the provided template or add your own story, connection to PCH, and why safer infrastructure matters to you.</p>
 <p>When you click Send Email, your default email app will open with the message ready to send.</p>
+<style>
+.sender-type-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #0b6e8a;
+}
+.tab-btn {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border: none;
+  background: #fff;
+  color: #0b6e8a;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border-right: 1px solid #0b6e8a;
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn--active {
+  background: #0b6e8a;
+  color: #fff;
+}
+.tab-btn:hover:not(.tab-btn--active) {
+  background: #dff1f6;
+}
+</style>
+
 <div class="email-box">
 
   <div class="email-intro">
     <strong>Who receives this email?</strong>
-    This message goes to a local decision makers working on transportation and street safety in Ventura. Your message will also be CC'd to Safe Rec Ventura. We use these copies only to tally how many emails have been sent, so we can hold the Board of Supervisors accountable.
+    This message goes to local decision makers working on transportation and street safety in Ventura. Your message will also be CC'd to Safe Rec Ventura. We use these copies only to tally how many emails have been sent, so we can hold the Board of Supervisors accountable.
     Your voice helps prioritize safer infrastructure for cyclists and pedestrians.
-    
+  </div>
+
+  <div class="form-group" style="margin-bottom:1.25rem;">
+    <label style="display:block; margin-bottom:0.6rem; font-weight:600;">I am a…</label>
+    <div class="sender-type-tabs">
+      <button type="button" class="tab-btn tab-btn--active" id="tab-resident" onclick="setType('resident')">Local Resident</button>
+      <button type="button" class="tab-btn" id="tab-nonresident" onclick="setType('nonresident')">Non-Local Visitor</button>
+      <button type="button" class="tab-btn" id="tab-business" onclick="setType('business')">Local Business</button>
+    </div>
   </div>
 
   <div class="form-row">
     <div class="form-group">
-      <label for="sender-name">Your Name <span style="color:#c0392b">*</span></label>
+      <label for="sender-name" id="name-label">Your Name <span style="color:#c0392b">*</span></label>
       <input type="text" id="sender-name" placeholder="Jane Smith" oninput="clearNameWarning()">
       <div id="name-warning" style="display:none; color:#c0392b; font-size:0.875rem; margin-top:4px;">Please enter your name before sending.</div>
     </div>
     <div class="form-group">
-      <label for="sender-hood">Your Neighborhood <em style="font-weight:400;text-transform:none">(optional)</em></label>
+      <label for="sender-hood" id="hood-label">Your Neighborhood <em style="font-weight:400;text-transform:none">(optional)</em></label>
       <input type="text" id="sender-hood" placeholder="e.g. Midtown, Downtown, Montalvo">
     </div>
   </div>
@@ -188,21 +227,34 @@ ul.task-list li input[type="checkbox"] {
 
   <div class="form-group">
     <label for="email-body">Your Message</label>
-    <textarea id="email-body" oninput="updateCount()">Honorable Representative,
-    
-We are writing to you with deep urgency and grief on behalf of our community — residents, cyclists, recreational users, and workers who live and travel throughout Ventura County and the greater tri-county area.
+    <textarea id="email-body" oninput="updateCount()"></textarea>
+    <div class="char-hint" id="char-count">0 characters</div>
+  </div>
+
+  <button class="send-btn" onclick="sendEmail()">✉ Send Email to Decision Maker</button>
+  <p class="email-note">
+    Clicking "Send Email" opens your default email application with this message pre-filled —
+    you can review it before sending. Nothing is sent automatically.
+  </p>
+</div>
+
+<script>
+const TEMPLATES = {
+  resident: `Honorable Representative,
+
+I am writing to you with deep urgency and grief as a resident of Ventura County — someone who lives in, works in, and travels through this community every day.
 
 On the evening of June 11, 2026, two people were killed and a third seriously injured on Pacific Coast Highway (State Route 1) near Solimar Beach Road, just north of Ventura. According to the California Highway Patrol and the Ventura County District Attorney's Office, a 24-year-old Oxnard man was traveling at 50–55 mph when he veered his pickup truck into the designated bicycle lane and struck three cyclists from behind. Kellie Standish, 33, of Bend, Oregon, died at the scene. William Colby Tucker, 39, of Ventura, died at Ventura County Medical Center. A third cyclist was hospitalized with serious injuries. The driver was arrested at the scene and has since been charged with two counts of second-degree murder, DUI causing injury, and driving on a suspended license. He is being held without bail.
 
-We write to you today about a separate and independent matter, one that predates June 11 and will outlast it: the documented, chronic failure of the PCH corridor in Ventura County to protect the lives of cyclists and pedestrians.
+I write to you today about a separate and independent matter, one that predates June 11 and will outlast it: the documented, chronic failure of the PCH corridor in Ventura County to protect the lives of cyclists and pedestrians.
 
-This is not a problem that began with one driver's choice. According to crash data documented in the California SWITRS database, maintained by the California Highway Patrol and mapped by UC Berkeley's SafeTREC through the TIMS platform, this stretch of State Route 1 has recorded 32 crashes over recent years 20 of which occurred in the northbound direction  resulting in fatalities and countless serious injuries including broken bones, traumatic brain injuries, and hospitalizations. These crashes span a range of contributing factors, not only impairment. For every person who has died on this corridor, many more have been left with injuries they will carry for the rest of their lives. The infrastructure of this corridor does not require a drunk driver to kill or injure people. It has done so without one. That is the independent public safety crisis we are asking you to address.
+This is not a problem that began with one driver's choice. According to crash data documented in the California SWITRS database, maintained by the California Highway Patrol and mapped by UC Berkeley's SafeTREC through the TIMS platform, this stretch of State Route 1 has recorded 32 crashes over recent years — 20 of which occurred in the northbound direction — resulting in fatalities and countless serious injuries including broken bones, traumatic brain injuries, and hospitalizations. These crashes span a range of contributing factors, not only impairment. For every person who has died on this corridor, many more have been left with injuries they will carry for the rest of their lives. The infrastructure of this corridor does not require a drunk driver to kill or injure people. It has done so without one. That is the independent public safety crisis I am asking you to address.
 
 This stretch of highway operates at a posted speed limit of 45 mph, with vehicles routinely exceeding that speed. It carries painted bike lanes with no physical separation from high-speed vehicle traffic. It provides beach access points, campgrounds, and recreational entry used by millions of visitors annually across the tri-county region. The infrastructure signals to cyclists, pedestrians, and families that this is a corridor where they are welcome. That signal is not backed by a design that protects their lives.
 
 Painted lines are not protection. They are paint.
 
-We are calling on you to act on the independent, systemic infrastructure failures of this corridor. Specifically, we respectfully urge you to:
+As a resident, I am calling on you to act on the independent, systemic infrastructure failures of this corridor. Specifically, I respectfully urge you to:
 
 - Immediately convene a multi-agency safety summit involving Caltrans District 7, CHP, Ventura County, and local municipalities to assess the full scope of fatalities and serious injuries on PCH between the Los Angeles County line and the City of Ventura — across all crash types and contributing factors.
 
@@ -216,27 +268,134 @@ We are calling on you to act on the independent, systemic infrastructure failure
 
 - Engage directly with affected community members, cyclists, and active transportation advocates in Ventura County in designing any proposed safety solutions.
 
-We acknowledge that improvements to a state highway require coordination across multiple levels of government, and we recognize the complexity of that process. But the families of Kellie Standish and William Colby Tucker, and the families of the others killed on this corridor before them, deserve more than condolences. They deserve to know that their loved ones' deaths will prompt lasting, structural change — independent of the outcome of any criminal proceeding.
+I acknowledge that improvements to a state highway require coordination across multiple levels of government, and I recognize the complexity of that process. But the families of Kellie Standish and William Colby Tucker, and the families of the others killed on this corridor before them, deserve more than condolences. They deserve to know that their loved ones' deaths will prompt lasting, structural change — independent of the outcome of any criminal proceeding.
+
+I am unequivocal: the driver who chose to drive while impaired bears sole criminal responsibility for the deaths of Kellie and Colby. Nothing in this letter should be read as diminishing that responsibility or as commentary on the pending criminal proceedings. Justice for Kellie and Colby must be pursued fully and without compromise.
+
+I ride, run, walk, live, and work along the Central Coast. I am not asking for the road to be closed to cars. I am asking you to treat this corridor as the public safety emergency the data shows it to be — and to act accordingly.
+
+Thank you for your attention to this critical matter. I welcome the opportunity to meet with your office and with Caltrans to discuss solutions. I stand ready to engage.
+
+Sincerely,
+[Your Name]`,
+
+  nonresident: `Honorable Representative,
+
+We are writing to you with deep urgency and grief following the tragic deaths of Kellie Standish and William Colby Tucker and the serious injuries sustained by a third cyclist on Pacific Coast Highway (State Route 1) near Solimar Beach Road on June 11, 2026. We write as non-residents who regularly visit Ventura County and as family members, friends, cyclists, recreational users, and visitors who travel throughout the Central Coast and greater Southern California region. While we may not live or vote in Ventura County, our loved ones use this corridor, and the safety decisions made here directly affect our families and communities.
+
+On the evening of June 11, 2026, two people were killed and a third seriously injured on Pacific Coast Highway (State Route 1) near Solimar Beach Road, just north of Ventura. According to the California Highway Patrol and the Ventura County District Attorney's Office, a 24-year-old Oxnard man was traveling at 50–55 mph when he veered his pickup truck into the designated bicycle lane and struck three cyclists from behind. Kellie Standish, 33, of Bend, Oregon, died at the scene. William Colby Tucker, 39, of Ventura, died at Ventura County Medical Center. A third cyclist was hospitalized with serious injuries. The driver was arrested at the scene and has since been charged with two counts of second-degree murder, DUI causing injury, and driving on a suspended license. He is being held without bail.
+
+We write to you today about a separate and independent matter, one that predates June 11 and will outlast it: the documented, chronic failure of the PCH corridor in Ventura County to protect the lives of cyclists and pedestrians.
+
+This is not a problem that began with one driver's choice. According to crash data documented in the California SWITRS database, maintained by the California Highway Patrol and mapped by UC Berkeley's SafeTREC through the TIMS platform, this stretch of State Route 1 has seen at least 11 fatalities and countless serious injuries over recent years across a range of crash types and contributing factors, not only impairment. The infrastructure of this corridor does not require a drunk driver to kill people. It has done so without one. That is the independent public safety crisis we are asking you to address.
+
+This stretch of highway operates at a posted speed limit of 45 mph, with vehicles routinely exceeding that speed. It carries painted bike lanes with no physical separation from high-speed vehicle traffic. It provides access to beaches, campgrounds, state parks, recreational destinations, and coastal communities that attract visitors from throughout California and beyond. The infrastructure signals to cyclists, pedestrians, runners, and families that this is a corridor where they are welcome. That signal is not backed by a design that protects their lives.
+
+Painted lines are not protection. They are paint.
+
+For those of us who live outside Ventura County, the impact of these failures is deeply personal. We are not only visitors to this corridor; we are people whose loved ones ride, run, walk, camp, and recreate here. We shouldn’t have to fear whether someone we care about will return home safely after using this roadway.
+
+We are calling on you to act on the independent, systemic infrastructure failures of this corridor. Specifically, we respectfully urge you to:
+
+- Immediately convene a multi-agency safety summit involving Caltrans District 7, CHP, Ventura County, and local municipalities to assess the full scope of fatalities and serious injuries on PCH between the Los Angeles County line and the City of Ventura — across all crash types and contributing factors.
+
+- Direct Caltrans to conduct an expedited safety study of the Ventura County PCH corridor, separate from and in addition to the ongoing Malibu-focused PCH Master Plan, with specific focus on the stretch near Solimar Beach, Faria Beach, Rincon, and Emma Wood State Beach.
+
+- Pursue emergency protective infrastructure measures in the near term, including physical separation barriers between bicycle lanes and vehicle travel lanes, reduced speed limits through known recreational access zones, enhanced signage, and increased DUI and speed enforcement.
+
+- Explore long-term solutions including dedicated separated bicycle paths, physical medians, and road design that honestly reflects the multi-modal nature of this corridor.
+
+- Secure state and federal funding — including ATP, HSIP, and CMAQ program resources — for safety improvements on this stretch of PCH, which serves residents and visitors alike and functions as a vital recreational and tourism corridor for the region.
+
+- Engage directly with affected community members, cyclists, active transportation advocates, and recreational users in designing any proposed safety solutions.
+
+We acknowledge that improvements to a state highway require coordination across multiple levels of government, and we recognize the complexity of that process. But the families of Kellie Standish and William Colby Tucker, the families of others killed on this corridor before them, and the countless visitors who continue to use this roadway deserve more than condolences. They deserve to know that these tragedies will prompt lasting, structural change independent of the outcome of any criminal proceeding.
 
 We are unequivocal: the driver who chose to drive while impaired and who had previously been warned of the deadly consequences of doing so following a December 2025 DUI arrest bears sole criminal responsibility for the deaths of Kellie and Colby. Nothing in this letter should be read as diminishing that responsibility or as commentary on the pending criminal proceedings. Justice for Kellie and Colby must be pursued fully and without compromise.
 
-We are community members who ride, run, walk, live, and work along the Central Coast. We are not asking for the road to be closed to cars. We are asking you to treat this corridor as the public safety emergency the data shows it to be and to act accordingly.
-
-Thank you for your attention to this critical matter. We welcome the opportunity to meet with your office and with Caltrans to discuss solutions. We stand ready to engage.
+Thank you for your attention to this critical matter. 
 
 Sincerely,
-[Your Name]</textarea>
-    <div class="char-hint" id="char-count">0 characters</div>
-  </div>
+[Your Name]`,
 
-  <button class="send-btn" onclick="sendEmail()">✉ Send Email to Decision Maker</button>
-  <p class="email-note">
-    Clicking "Send Email" opens your default email application with this message pre-filled —
-    you can review it before sending. Nothing is sent automatically.
-  </p>
-</div>
+  business: `Honorable Representative,
 
-<script>
+We are writing to you as Ventura County business owners, employers, and members of the local business community with deep concern following the tragic deaths of Kellie Standish and William Colby Tucker and the serious injuries sustained by a third cyclist on Pacific Coast Highway (State Route 1) near Solimar Beach Road on June 11, 2026.
+
+Beyond this tragedy, we are asking you to address a separate and independent matter, one that predates June 11 and will outlast it: the documented, chronic failure of the PCH corridor in Ventura County to adequately protect cyclists and pedestrians.
+
+This is not a problem that began with one driver's actions. According to crash data documented in the California SWITRS database, maintained by the California Highway Patrol and mapped by UC Berkeley's SafeTREC through the TIMS platform, this stretch of State Route 1 has experienced at least 11 fatalities and numerous serious injuries over recent years across a variety of crash types and contributing factors. The infrastructure itself has become a recurring public safety concern that deserves immediate attention.
+
+This stretch of highway operates at a posted speed limit of 45 mph, with vehicles frequently traveling faster. It includes painted bicycle lanes immediately adjacent to high-speed traffic while also serving beaches, campgrounds, state parks, recreational access points, and coastal businesses that attract millions of visitors each year. This stretch of the PCH communicates that cycling, walking, and recreation are welcome here. Its design does not provide the level of protection that those uses require.
+
+Our businesses are built around the extraordinary natural resources that have made Ventura County one of California's premier destinations for outdoor recreation and coastal tourism. Every year, visitors come here to experience our beaches, campgrounds, scenic coastline, cycling routes, restaurants, hotels, shops, and parks. Safe access to these destinations is essential to our local economy. When visitors repeatedly see tragic crashes on one of the County's most iconic recreational corridors without meaningful safety improvements, public confidence is eroded. Families reconsider vacations, cyclists choose other destinations, and businesses throughout Ventura County feel the impact.
+
+Just as importantly, our employees, customers, neighbors, friends, and family members use this corridor every day. Public safety and economic vitality are inseparable. Protecting people who live, work, and recreate here is essential to preserving Ventura County's reputation as a world-class coastal destination.
+
+We respectfully urge Ventura County to work with Caltrans District 7, the California Highway Patrol, state leaders, and local municipalities to:
+
+- Immediately convene a multi-agency safety summit involving Caltrans District 7, CHP, Ventura County, and local municipalities to assess the full scope of fatalities and serious injuries on PCH between the Los Angeles County line and the City of Ventura — across all crash types and contributing factors.
+
+- Direct Caltrans to conduct an expedited safety study of the Ventura County PCH corridor, separate from and in addition to the ongoing Malibu-focused PCH Master Plan, with specific focus on the stretch near Solimar Beach, Faria Beach, Rincon, and Emma Wood State Beach.
+
+- Pursue emergency protective infrastructure measures in the near term, including physical separation barriers between bicycle lanes and vehicle travel lanes, reduced speed limits through known recreational access zones, enhanced signage, and increased DUI and speed enforcement.
+
+- Explore long-term solutions including dedicated separated bicycle paths, physical medians, and road design that honestly reflects the multi-modal nature of this corridor.
+
+- Secure state and federal funding — including ATP, HSIP, and CMAQ program resources — for safety improvements on this stretch of PCH, which serves both urban and unincorporated communities across county lines.
+
+- Engage directly with affected community members, cyclists, and active transportation advocates in Ventura County in designing any proposed safety solutions.
+
+- We recognize that improvements to a state highway require coordination among multiple agencies and levels of government. We also recognize that meaningful infrastructure changes take time. However, the repeated loss of life on this corridor demonstrates that maintaining the status quo is not an acceptable option.
+
+We are unequivocal: the driver who chose to drive while impaired and who had previously been warned of the deadly consequences of doing so following a December 2025 DUI arrest bears sole criminal responsibility for the deaths of Kellie and Colby. Nothing in this letter should be read as diminishing that responsibility or as commentary on the pending criminal proceedings. Justice for Kellie and Colby must be pursued fully and without compromise.
+
+Protecting people who walk, ride, and recreate along Pacific Coast Highway is an investment in Ventura County's economy, its workforce, its reputation, and its future. We ask you to demonstrate that Ventura County is committed to protecting everyone who lives, works, visits, and recreates here. The actions taken today will shape not only the safety of this corridor, but also the public's confidence in Ventura County as a world-class coastal destination for generations to come.
+
+Thank you for your leadership and your attention to this urgent matter. We welcome the opportunity to work alongside you in support of meaningful safety improvements that will benefit our community, our businesses, and everyone who comes to experience Ventura County.
+
+Sincerely,
+[Business Name]
+[Your Role]`
+};
+
+let currentType = 'resident';
+
+function setType(type) {
+  currentType = type;
+
+  // Update tab styles
+  ['resident', 'nonresident', 'business'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('tab-btn--active', t === type);
+  });
+
+  // Update labels and placeholders for both fields
+  const nameInput = document.getElementById('sender-name');
+  const nameLabel = document.getElementById('name-label');
+  const hoodInput = document.getElementById('sender-hood');
+  const hoodLabel = document.getElementById('hood-label');
+  if (type === 'resident') {
+    nameLabel.innerHTML = 'Your Name <span style="color:#c0392b">*</span>';
+    nameInput.placeholder = 'Jane Smith';
+    hoodLabel.innerHTML = 'Your Neighborhood <em style="font-weight:400;text-transform:none">(optional)</em>';
+    hoodInput.placeholder = 'e.g. Midtown, Downtown, Montalvo';
+  } else if (type === 'nonresident') {
+    nameLabel.innerHTML = 'Your Name <span style="color:#c0392b">*</span>';
+    nameInput.placeholder = 'Jane Smith';
+    hoodLabel.innerHTML = 'Your City / State <em style="font-weight:400;text-transform:none">(optional)</em>';
+    hoodInput.placeholder = 'e.g. Los Angeles, CA';
+  } else {
+    nameLabel.innerHTML = 'Business Name <span style="color:#c0392b">*</span>';
+    nameInput.placeholder = 'e.g. Ventura Surf Shop';
+    hoodLabel.innerHTML = 'Your Role <em style="font-weight:400;text-transform:none">(optional)</em>';
+    hoodInput.placeholder = 'e.g. Owner, Manager';
+  }
+
+  // Swap template
+  document.getElementById('email-body').value = TEMPLATES[type];
+  updateCount();
+}
+
 function updateCount() {
   const len = document.getElementById("email-body").value.length;
   document.getElementById("char-count").textContent = len.toLocaleString() + " characters";
@@ -260,9 +419,16 @@ function sendEmail() {
     return;
   }
 
-  // Insert name into signature placeholder
-  const sig = hood ? name + ", " + hood + " resident" : name;
-  body = body.replace("[Your Name]", sig);
+  // Build signature
+  if (currentType === 'business') {
+    body = body.replace(/\[Business Name\]/g, name);
+    body = body.replace("[Your Role]", hood || "");
+  } else {
+    let sig = name;
+    if (currentType === 'resident' && hood) sig = name + ", " + hood + " resident";
+    else if (currentType === 'nonresident' && hood) sig = name + " (" + hood + ")";
+    body = body.replace("[Your Name]", sig);
+  }
 
   const to = [
     "matt.lavere@venturacounty.gov",
@@ -285,8 +451,9 @@ function sendEmail() {
   window.location.href = mailto;
 }
 
-// Init count
-document.addEventListener("DOMContentLoaded", updateCount);
+document.addEventListener("DOMContentLoaded", function() {
+  setType('resident');
+});
 </script>
 <hr>
 
