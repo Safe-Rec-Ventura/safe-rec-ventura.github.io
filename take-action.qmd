@@ -50,7 +50,7 @@ When you click Send Email, your default email app will open with the message rea
 
   <div class="email-intro">
     <strong>Who receives this email?</strong>
-    This message goes to local decision makers working on transportation and street safety in Ventura. Your message will also be CC'd to Safe Rec Ventura. We use these copies only to tally how many emails have been sent, so we can hold the Board of Supervisors accountable.
+    This message goes to local decision makers working on transportation and street safety in Ventura.
     Your voice helps prioritize safer infrastructure for cyclists and pedestrians.
   </div>
 
@@ -299,8 +299,7 @@ function sendEmail() {
   ].join(",");
 
   const mailto = "mailto:" + to
-    + "?bcc=saferecventura@gmail.com"
-    + "&subject=" + encodeURIComponent(subject)
+    + "?subject=" + encodeURIComponent(subject)
     + "&body="    + encodeURIComponent(body);
 
   window.location.href = mailto;
