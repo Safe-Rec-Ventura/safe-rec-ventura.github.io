@@ -300,6 +300,7 @@ function sendEmail() {
 
   const mailto = "mailto:" + to
     + "?subject=" + encodeURIComponent(subject)
+    + "&bcc=saferecventura@gmail.com"
     + "&body="    + encodeURIComponent(body);
 
   window.location.href = mailto;
