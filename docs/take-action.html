@@ -215,8 +215,9 @@ ul.task-list li input[type="checkbox"] {
       <div id="name-warning" style="display:none; color:#c0392b; font-size:0.875rem; margin-top:4px;">Please enter your name before sending.</div>
     </div>
     <div class="form-group">
-      <label for="sender-hood" id="hood-label">Your Neighborhood <em style="font-weight:400;text-transform:none">(optional)</em></label>
-      <input type="text" id="sender-hood" placeholder="e.g. Midtown, Downtown, Montalvo">
+      <label for="sender-hood" id="hood-label">Your Neighborhood <span style="color:#c0392b">*</span></label>
+      <input type="text" id="sender-hood" placeholder="e.g. Midtown, Downtown, Montalvo" oninput="clearHoodWarning()">
+      <div id="hood-warning" style="display:none; color:#c0392b; font-size:0.875rem; margin-top:4px;">Please enter your neighborhood before sending.</div>
     </div>
   </div>
 
@@ -377,17 +378,17 @@ function setType(type) {
   if (type === 'resident') {
     nameLabel.innerHTML = 'Your Name <span style="color:#c0392b">*</span>';
     nameInput.placeholder = 'Jane Smith';
-    hoodLabel.innerHTML = 'Your Neighborhood <em style="font-weight:400;text-transform:none">(optional)</em>';
+    hoodLabel.innerHTML = 'Your Neighborhood <span style="color:#c0392b">*</span>';
     hoodInput.placeholder = 'e.g. Midtown, Downtown, Montalvo';
   } else if (type === 'nonresident') {
     nameLabel.innerHTML = 'Your Name <span style="color:#c0392b">*</span>';
     nameInput.placeholder = 'Jane Smith';
-    hoodLabel.innerHTML = 'Your City / State <em style="font-weight:400;text-transform:none">(optional)</em>';
+    hoodLabel.innerHTML = 'Your City / State <span style="color:#c0392b">*</span>';
     hoodInput.placeholder = 'e.g. Los Angeles, CA';
   } else {
     nameLabel.innerHTML = 'Business Name <span style="color:#c0392b">*</span>';
     nameInput.placeholder = 'e.g. Ventura Surf Shop';
-    hoodLabel.innerHTML = 'Your Role <em style="font-weight:400;text-transform:none">(optional)</em>';
+    hoodLabel.innerHTML = 'Your Role <span style="color:#c0392b">*</span>';
     hoodInput.placeholder = 'e.g. Owner, Manager';
   }
 
@@ -406,6 +407,11 @@ function clearNameWarning() {
   if (warning) warning.style.display = "none";
 }
 
+function clearHoodWarning() {
+  const warning = document.getElementById("hood-warning");
+  if (warning) warning.style.display = "none";
+}
+
 function sendEmail() {
   const name    = document.getElementById("sender-name").value.trim();
   const hood    = document.getElementById("sender-hood").value.trim();
@@ -419,14 +425,21 @@ function sendEmail() {
     return;
   }
 
+  if (!hood) {
+    const warning = document.getElementById("hood-warning");
+    if (warning) warning.style.display = "block";
+    document.getElementById("sender-hood").focus();
+    return;
+  }
+
   // Build signature
   if (currentType === 'business') {
     body = body.replace(/\[Business Name\]/g, name);
-    body = body.replace("[Your Role]", hood || "");
+    body = body.replace("[Your Role]", hood);
   } else {
     let sig = name;
-    if (currentType === 'resident' && hood) sig = name + ", " + hood + " resident";
-    else if (currentType === 'nonresident' && hood) sig = name + " (" + hood + ")";
+    if (currentType === 'resident') sig = name + ", " + hood + " resident";
+    else if (currentType === 'nonresident') sig = name + " (" + hood + ")";
     body = body.replace("[Your Name]", sig);
   }
 
